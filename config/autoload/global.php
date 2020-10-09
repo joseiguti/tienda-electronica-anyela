@@ -16,7 +16,7 @@ return [
     'db' => [
         'database' => 'tienda',
         'driver' => 'PDO_Mysql',
-        'hostname' => '127.0.0.1',
+        'hostname' => 'localhost',
         'username' => 'root',
         'password' => '',
         'port' => '3306'
