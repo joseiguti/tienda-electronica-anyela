@@ -19,6 +19,13 @@ class TiendaController extends AbstractActionController {
         $this->table = $table;
     }
 
+    public function saludarAction (){
+
+        $producto = $this->table->getProducto(3);
+
+        return new ViewModel(['nombre' => $producto->nombre]);
+    }
+
     public function indexAction ()
     {
         return new ViewModel([
@@ -36,7 +43,7 @@ class TiendaController extends AbstractActionController {
 
             $form = new ProductosForm();
 
-            $form->get('submit')->setValue('Add');
+            $form->get('submit')->setValue('Agregar');
 
             if (! $this->getRequest()->isPost()) {
 

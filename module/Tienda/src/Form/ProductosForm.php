@@ -115,5 +115,35 @@ class ProductosForm extends Form
             ],
         ]);
 
+        $inputFilter->add([
+            'name' => 'precio',
+            'required' => true,
+            'filters' => [
+                ['name' => \Laminas\Filter\StripTags::class],
+                ['name' => \Laminas\Filter\StringTrim::class],
+                ['name' => \Laminas\Filter\StripNewlines::class],
+            ],
+            'validators' => [
+                [
+                    'name' => \Laminas\Validator\NotEmpty::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'messages' => [
+                            \Laminas\Validator\NotEmpty::IS_EMPTY => "No puede ser vacio.",
+                        ],
+                    ],
+                ],
+                [
+                    'name' => \Laminas\Validator\Digits::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'messages' => [
+                            \Laminas\Validator\Digits::NOT_DIGITS => 'No has escrito numeros',
+                        ],
+                    ],
+                ]
+            ],
+        ]);
+
     }
 }

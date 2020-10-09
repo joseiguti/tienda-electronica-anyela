@@ -1,8 +1,8 @@
 <?php
-$title = (!$id)?'Add new product':'Edit the product';
+$title = (!$id)?'Agregar nuevo producto':'Editar producto';
 $this->headTitle($title);
 ?>
-    <h1><?= $this->escapeHtml($title) ?></h1>
+    <h2><?= $this->escapeHtml($title) ?></h2>
 <?php
 
 $nombre = $form->get('nombre');
