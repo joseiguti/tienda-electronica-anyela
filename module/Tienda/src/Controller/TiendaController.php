@@ -26,10 +26,10 @@ class TiendaController extends AbstractActionController {
         return new ViewModel(['nombre' => $producto->nombre]);
     }
     public function calcularAction (){
+        return new ViewModel([
 
-        $producto = $this->table->getProducto(3);
-
-        return new ViewModel(['nombre' => $producto->nombre]);
+            'productos' => $this->table->fetchAll(),
+        ]);
     }
 
     public function indexAction ()
@@ -84,7 +84,14 @@ class TiendaController extends AbstractActionController {
             } catch (\Exception $e) {
 
                 return $this->redirect()->toRoute('tienda', ['action' => 'index']);
+                          }
+
+            catch (\Exception $e) {
+
+                 return $this->redirect()->toRoute('calcular', ['action' => 'calcular']);
             }
+
+
 
             $form = new ProductosForm($producto);
 

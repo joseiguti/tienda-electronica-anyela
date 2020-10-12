@@ -1,0 +1,97 @@
+<?php use Laminas\Form\Element;
+
+$element = new Element\Hidden('my-hidden');
+$element->setValue('foo');
+
+?>
+
+<table class="table">
+    <tr>
+        <th>Valor de Utilidad</th>
+        <th>Utilidad</th>
+        <th>Iva</th>
+        <th></th>
+    </tr>
+    <tr>
+            <td><input type="text" name="valor"></td>
+            <td><input type="text" name="utilidad"></td>
+            <td><input type="text" name="iva"></td>
+            <td></td>
+        </tr>
+    <tr>
+        <td></td>
+        <td>
+            <input type="submit" value="Calcular">
+        </td>
+        <td></td>
+    </tr>
+</table>
+
+<table class="table">
+
+    <tr>
+        <th>1 Banda</th>
+        <th><select name="Colo1">
+
+                <option>negro</option>
+                <option>cafe</option>
+                <option>rojo</option>
+                <option>naranja</option>
+                <option>amarillo</option>
+                <option>verde</option>
+                <option>azul</option>
+                <option>Violeta </option>
+                <option>Gris</option>
+                <option>Blanco</option>
+
+            </select></th>
+          </tr>
+    <tr>
+        <td>2 Banda</td>
+        <th><select name="Colo2">
+
+                <option>negro</option>
+                <option>cafe</option>
+                <option>rojo</option>
+                <option>naranja</option>
+                <option>amarillo</option>
+                <option>verde</option>
+                <option>azul</option>
+                <option>Violeta </option>
+                <option>Gris</option>
+                <option>Blanco</option>
+
+            </select></th>
+           <td></td>
+    </tr>
+    <tr>
+        <td>3 Banda</td>
+        <th><select name="Colo3">
+
+                <option>negro</option>
+                <option>cafe</option>
+                <option>rojo</option>
+                <option>naranja</option>
+                <option>amarillo</option>
+                <option>verde</option>
+                <option>azul</option>
+                <option>Violeta </option>
+                <option>Gris</option>
+                <option>Blanco</option>
+
+            </select></th>
+                <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <th> Valor dw la resistencia <input type="text" name="valor"> ohmios</th>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <th><input type="submit" value="Calcular"></th>
+        <td></td>
+    </tr>
+
+</table>
