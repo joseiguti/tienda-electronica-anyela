@@ -12,6 +12,8 @@ class Productos
 
     public $cantidad;
 
+    public $marca;
+
     public function exchangeArray(array $data)
     {
         $this->id     = !empty($data['id']) ? $data['id'] : null;
@@ -21,5 +23,7 @@ class Productos
         $this->precio = !empty($data['precio']) ? $data['precio'] : null;
 
         $this->cantidad = !empty($data['cantidad']) ? $data['cantidad'] : null;
+
+        $this->marca = !empty($data['marca']) ? $data['marca'] : null;
     }
 }

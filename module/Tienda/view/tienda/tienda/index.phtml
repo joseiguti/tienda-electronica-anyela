@@ -13,6 +13,7 @@ $this->headTitle($title);
         <th>Nombre</th>
         <th>Precio</th>
         <th>Cantidad</th>
+        <th>Marca</th>
         <th></th>
     </tr>
     <?php foreach ($productos as $producto) : ?>
@@ -20,6 +21,7 @@ $this->headTitle($title);
             <td><?= $this->escapeHtml($producto->nombre) ?></td>
             <td><?= $this->escapeHtml($producto->precio) ?></td>
             <td><?= $this->escapeHtml($producto->cantidad) ?></td>
+            <td><?= $this->escapeHtml($producto->marca) ?></td>
             <td>
                 <a href="<?= $this->url('tienda', ['action' => 'record', 'id' => $producto->id]) ?>">Editar</a>
                 <a href="<?= $this->url('tienda', ['action' => 'delete', 'id' => $producto->id]) ?>" onclick="return confirm('Confirma eliminar?')">Borrar</a>

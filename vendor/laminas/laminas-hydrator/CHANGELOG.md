@@ -2,6 +2,108 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.2.0 - 2020-10-06
+
+### Added
+
+- [#32](https://github.com/laminas/laminas-hydrator/pull/32) adds support for PHP 8.
+
+### Changed
+
+- [#32](https://github.com/laminas/laminas-hydrator/pull/32) changes the minimum supported version of laminas-stdlib from 3.2 to 3.3.
+
+### Removed
+
+- [#32](https://github.com/laminas/laminas-hydrator/pull/32) removes support for PHP versions prior to 7.3.
+
+
+-----
+
+### Release Notes for [3.2.0](https://github.com/laminas/laminas-hydrator/milestone/4)
+
+
+
+### 3.2.0
+
+- Total issues resolved: **1**
+- Total pull requests resolved: **2**
+- Total contributors: **2**
+
+#### Enhancement
+
+ - [33: Adds Psalm integration](https://github.com/laminas/laminas-hydrator/pull/33) thanks to @weierophinney and @boesing
+ - [32: Feature/php 8 support](https://github.com/laminas/laminas-hydrator/pull/32) thanks to @weierophinney
+
+## 3.1.1 -2020-10-06
+
+-----
+
+### Release Notes for [3.1.1](https://github.com/laminas/laminas-hydrator/milestone/5)
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **3**
+- Total contributors: **3**
+
+#### Documentation
+
+ - [27: Update map-naming-strategy.md](https://github.com/laminas/laminas-hydrator/pull/27) thanks to @xorock
+
+#### Documentation,Enhancement,Review Needed
+
+ - [24: Rework the Index and Quick Start guide](https://github.com/laminas/laminas-hydrator/pull/24) thanks to @settermjd
+
+#### Bug,Documentation
+
+ - [23: Fixed StrategyInterface::hydrate() docblock because it is not optional](https://github.com/laminas/laminas-hydrator/pull/23) thanks to @svycka
+
+## 3.1.0 - 2020-07-14
+
+### Added
+
+- [#17](https://github.com/laminas/laminas-hydrator/pull/17) adds a new strategy, `DateTimeImmutableFormatterStrategy`, to provide bidirectional conversion between strings and `DateTimeImmutable` instances.
+
+- [#16](https://github.com/laminas/laminas-hydrator/pull/16) adds a new strategy implementation, `Laminas\Hydrator\Strategy\Hydrator`. It can be used to hydrate nested objects and vice versa.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## 3.0.3 - 2020-07-14
+
+### Added
+
+- [#17](https://github.com/laminas/laminas-hydrator/pull/17) adds a new strategy, `DateTimeImmutableFormatterStrategy`, to provide bidirectional conversion between strings and `DateTimeImmutable` instances.
+
+- [#16](https://github.com/laminas/laminas-hydrator/pull/16) adds a new strategy implementation, `Laminas\Hydrator\Strategy\Hydrator`. It can be used to hydrate nested objects and vice versa.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#5](https://github.com/laminas/laminas-hydrator/pull/5) fixes an error that occurs in `Laminas\Hydrator\Filter\FilterComposite` when used under the Swoole extension.
+
 ## 3.0.2 - 2019-03-15
 
 ### Added

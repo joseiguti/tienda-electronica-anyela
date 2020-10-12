@@ -41,6 +41,7 @@ class ProductosTable
             'nombre' => $producto->nombre,
             'precio' => $producto->precio,
             'cantidad' => $producto->cantidad,
+            'marca' => $producto->marca,
         ];
 
         $id = (int) $producto->id;

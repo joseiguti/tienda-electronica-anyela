@@ -25,6 +25,12 @@ class TiendaController extends AbstractActionController {
 
         return new ViewModel(['nombre' => $producto->nombre]);
     }
+    public function calcularAction (){
+
+        $producto = $this->table->getProducto(3);
+
+        return new ViewModel(['nombre' => $producto->nombre]);
+    }
 
     public function indexAction ()
     {
@@ -33,6 +39,7 @@ class TiendaController extends AbstractActionController {
             'productos' => $this->table->fetchAll(),
         ]);
     }
+
 
     public function recordAction ()
     {
@@ -118,3 +125,4 @@ class TiendaController extends AbstractActionController {
 
     
 }
+

@@ -2,6 +2,68 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.3.0 - 2020-09-02
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- [#9](https://github.com/laminas/laminas-component-installer/pull/9) modifies the installer to add development dependencies to the `development.config.php` file instead of the `modules.config.php` file in MVC applications.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+
+-----
+
+### Release Notes for [2.3.0](https://github.com/laminas/laminas-component-installer/milestone/2)
+
+
+
+### 2.3.0
+
+- Total issues resolved: **1**
+- Total pull requests resolved: **1**
+- Total contributors: **2**
+
+#### Enhancement
+
+ - [9: Update whitelisted dev dependencies injection](https://github.com/laminas/laminas-component-installer/pull/9) thanks to @kpicaza and @weierophinney
+## 2.2.0 - 2020-07-01
+
+### Added
+
+- [#8](https://github.com/laminas/laminas-component-installer/pull/8) adds PHP 7.4 for travis build matrix
+
+- [#7](https://github.com/laminas/laminas-component-installer/pull/7) Added support for composer v2
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 2.1.2 - 2019-09-04
 
 ### Added

@@ -67,6 +67,19 @@ class ProductosForm extends Form
         ]);
 
         $this->add([
+            'name' => 'marca',
+            'type' => 'text',
+            'options' => [
+                'label' => 'Marca',
+            ],
+            'attributes' => [
+                'id' => 'marca',
+                'value' => (!is_null($producto)?$producto->marca:''),
+            ],
+
+        ]);
+
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [

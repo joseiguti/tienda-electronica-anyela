@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.4.2 - 2020-05-20
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#13](https://github.com/laminas/laminas-test/pull/13) updates parameter typehints in `assertApplicationException` to provide type information.
+
+- [#13](https://github.com/laminas/laminas-test/pull/13) fixes an expectation failure message in `assertApplicationException` to provide better verbiage.
+
 ## 3.4.1 - 2020-03-29
 
 ### Added
@@ -263,25 +287,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - This release removes support for PHP versions `< 5.6`.
 - This release removes support for laminas-mvc v2.
-
-### Fixed
-
-- Nothing.
-
-## 2.6.2 - TBD
-
-### Added
-
-- [zendframework/zend-test#22](https://github.com/zendframework/zend-test/pull/22) adds and publishes
-  the documentation to https://docs.laminas.dev/laminas-test/
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
 
 ### Fixed
 

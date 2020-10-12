@@ -2,6 +2,96 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.10.1 - 2020-09-01
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#17](https://github.com/laminas/laminas-modulemanager/pull/17) removes an extraneous ";" character from generated cache files.
+
+
+-----
+
+### Release Notes for [2.10.1](https://github.com/laminas/laminas-modulemanager/milestone/4)
+
+next bugfix release (mini)
+
+### 2.10.1
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
+
+#### Bug
+
+ - [17: Fix superfluous traling semicolon in cached config](https://github.com/laminas/laminas-modulemanager/pull/17) thanks to @bcremer
+## 2.10.0 - 2020-08-25
+
+### Added
+
+- [#15](https://github.com/laminas/laminas-modulemanager/pull/15) adds support for caching closures when caching configuration.
+
+- [#16](https://github.com/laminas/laminas-modulemanager/pull/16) adds support for the upcoming PHP 8.0 release.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- [#8](https://github.com/laminas/laminas-modulemanager/pull/8) removes support for PHP versions prior to PHP 7.3.
+
+- [#16](https://github.com/laminas/laminas-modulemanager/pull/16) removes support for v2 releases (deprecated) of the following components:
+  - laminas-config
+  - laminas-eventmanger
+  - laminas-servicemanager
+  - laminas-stdlib
+
+### Fixed
+
+- Nothing.
+
+## 2.9.0 - 2020-08-25
+
+### Added
+
+- [#9](https://github.com/laminas/laminas-modulemanager/pull/9) adds [webimpress/safe-writer](https://github.com/webimpress/safe-writer) for saving cache files safely to avoid race conditions when the same file is written multiple times in a short time period. 
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 2.8.4 - 2019-10-28
 
 ### Added

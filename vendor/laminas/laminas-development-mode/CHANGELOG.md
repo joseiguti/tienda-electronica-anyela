@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.2.1 - 2020-08-03
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#7](https://github.com/laminas/laminas-development-mode/pull/7) fixes autoloader discovery when used on MacOS.
+
 ## 3.2.0 - 2018-05-07
 
 ### Added
@@ -78,7 +100,7 @@ All notable changes to this project will be documented in this file, in reverse 
 - [zfcampus/zf-development-mode#19](https://github.com/zfcampus/zf-development-mode/pull/19) removes
   integration with laminas-mvc/laminas-console.
 - [zfcampus/zf-development-mode#19](https://github.com/zfcampus/zf-development-mode/pull/19) removes
-  the suggestions to install LaminasDeveloperTools and LaminasTool, as they are not
+  the suggestions to install LaminasDeveloperTools and ZFTool, as they are not
   ready for laminas-mvc v3.
 - [zfcampus/zf-development-mode#19](https://github.com/zfcampus/zf-development-mode/pull/19) removes
   support for PHP versions less than 5.6.
