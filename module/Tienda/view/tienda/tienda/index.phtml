@@ -7,6 +7,10 @@ $this->headTitle($title);
 <p>
     <a href="<?= $this->url('tienda', ['action' => 'record']) ?>">Nuevo producto</a>
 </p>
+<p>
+    <input type="text" id="consultar" value="0" ">
+    <a href="<?= $this->url('tienda', ['action' => 'record']) ?>">Consultar</a>
+</p>
 
 <table class="table">
     <tr>

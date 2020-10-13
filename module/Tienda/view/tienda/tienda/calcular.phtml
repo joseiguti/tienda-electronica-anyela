@@ -7,21 +7,23 @@ $element->setValue('foo');
 
 <table class="table">
     <tr>
-        <th>Valor de Utilidad</th>
+        <th>Valor de de la compra</th>
         <th>Utilidad</th>
         <th>Iva</th>
         <th></th>
     </tr>
     <tr>
-            <td><input type="text" name="valor"></td>
-            <td><input type="text" name="utilidad"></td>
-            <td><input type="text" name="iva"></td>
+            <td><input type="text" id="valor" value="0" onChange="multiplicar();"></td>
+            <td><input type="text" id="utilidad" value="0" onChange="multiplicar();"></td>
+            <td><input type="text" id="iva" value="0" onChange="multiplicar();"></td>
             <td></td>
         </tr>
     <tr>
-        <td></td>
         <td>
-            <input type="submit" value="Calcular">
+            Ganancia<input type="text" id="resultado">
+        </td>
+        <td>
+            Valor venta<input type="text" id="resultado2">
         </td>
         <td></td>
     </tr>
@@ -31,66 +33,66 @@ $element->setValue('foo');
 
     <tr>
         <th>1 Banda</th>
-        <th><select name="Colo1">
+        <th><select id="color1" onChange="colores();">
 
-                <option>negro</option>
-                <option>cafe</option>
-                <option>rojo</option>
-                <option>naranja</option>
-                <option>amarillo</option>
-                <option>verde</option>
-                <option>azul</option>
-                <option>Violeta </option>
-                <option>Gris</option>
-                <option>Blanco</option>
+                <option value="0">negro</option>
+                <option value="1">cafe</option>
+                <option value="2">rojo</option>
+                <option value="3">naranja</option>
+                <option value="4">amarillo</option>
+                <option value="5">verde</option>
+                <option value="6">azul</option>
+                <option value="7">Violeta </option>
+                <option value="8">Gris</option>
+                <option value="9">Blanco</option>
 
             </select></th>
           </tr>
     <tr>
         <td>2 Banda</td>
-        <th><select name="Colo2">
+        <th><select id="color2" onChange="colores();">
 
-                <option>negro</option>
-                <option>cafe</option>
-                <option>rojo</option>
-                <option>naranja</option>
-                <option>amarillo</option>
-                <option>verde</option>
-                <option>azul</option>
-                <option>Violeta </option>
-                <option>Gris</option>
-                <option>Blanco</option>
+                <option value="0">negro</option>
+                <option value="1">cafe</option>
+                <option value="2">rojo</option>
+                <option value="3">naranja</option>
+                <option value="4">amarillo</option>
+                <option value="5">verde</option>
+                <option value="6">azul</option>
+                <option value="7">Violeta </option>
+                <option value="8">Gris</option>
+                <option value="9">Blanco</option>
 
             </select></th>
            <td></td>
     </tr>
     <tr>
         <td>3 Banda</td>
-        <th><select name="Colo3">
+        <th><select id="color3" onChange="colores();">
 
-                <option>negro</option>
-                <option>cafe</option>
-                <option>rojo</option>
-                <option>naranja</option>
-                <option>amarillo</option>
-                <option>verde</option>
-                <option>azul</option>
-                <option>Violeta </option>
-                <option>Gris</option>
-                <option>Blanco</option>
+                <option value="1">negro</option>
+                <option value="10">cafe</option>
+                <option value="100">rojo</option>
+                <option value="1000">naranja</option>
+                <option value="10000">amarillo</option>
+                <option value="100000">verde</option>
+                <option value="1000000">azul</option>
+                <option value="10000000">Violeta </option>
+                <option value="100000000">Gris</option>
+                <option value="1000000000">Blanco</option>
 
             </select></th>
                 <td></td>
     </tr>
     <tr>
         <td></td>
-        <th> Valor dw la resistencia <input type="text" name="valor"> ohmios</th>
+        <th> Valor de la resistencia <input type="text" id="resultado3"> ohmios</th>
         <td></td>
         <td></td>
     </tr>
     <tr>
         <td></td>
-        <th><input type="submit" value="Calcular"></th>
+        <th></th>
         <td></td>
     </tr>
 
