@@ -32,6 +32,13 @@ class TiendaController extends AbstractActionController {
         ]);
     }
 
+    public function creacionAction (){
+        return new ViewModel([
+
+            'productos' => $this->table->fetchAll(),
+        ]);
+    }
+
     public function indexAction ()
     {
         return new ViewModel([
@@ -129,7 +136,13 @@ class TiendaController extends AbstractActionController {
         return $this->redirect()->toRoute('tienda');
     }
 
+    public function crearAction ()
+    {
+        return new ViewModel([
 
+            'productos' => $this->table->fetchAll(),
+        ]);
+    }
     
 }
 

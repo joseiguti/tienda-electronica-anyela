@@ -1,0 +1,15 @@
+<?php use Laminas\Form\Element;
+
+$element = new Element\Hidden('my-hidden');
+$element->setValue('foo');
+
+?>
+
+<table>
+  <tr>
+      <td> <a href="<?= $this->url('tienda', ['action' => 'crear', 'id' => $producto->id]) ?>">Crear Base de Datos</a>  </td>
+    </tr>
+    <tr>
+        <td> Crear tabla</td>
+    </tr>
+</table>
