@@ -28,6 +28,20 @@ return [
                     ],
                 ],
             ],
+            'bd' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/bd[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]+',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\BdController::class,
+                        'action'     => 'index'
+                    ],
+                ],
+            ],
         ],
     ],
 
