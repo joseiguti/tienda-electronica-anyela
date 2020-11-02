@@ -7,10 +7,23 @@ $this->headTitle($title);
 <p>
     <a href="<?= $this->url('tienda', ['action' => 'record']) ?>">Nuevo producto</a>
 </p>
-<p>
-    <input type="text" id="consultar" value="0" ">
-    <a href="<?= $this->url('tienda', ['action' => 'record']) ?>">Consultar</a>
-</p>
+
+<form action="<?= $this->url('tienda', ['action' => 'index']) ?>" method="post">
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Buscar por</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Nombre:</div>
+        </div>
+        <input type="text" class="form-control" id="texto_buscar" name="texto_buscar" placeholder="Buscar por...">
+      </div>
+    </div>    
+    <div class="col-auto">
+      <button type="submit" id="buscar" name="buscar" class="btn btn-primary mb-2">Buscar</button>
+    </div>
+  </div>
+</form>
 
 <table class="table">
     <tr>

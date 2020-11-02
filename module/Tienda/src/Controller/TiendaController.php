@@ -41,9 +41,19 @@ class TiendaController extends AbstractActionController {
 
     public function indexAction ()
     {
+        
+        $buscar = '';
+        
+        if ($this->getRequest()->isPost()) {
+            
+            $buscar = $this->params()->fromPost()['texto_buscar'];
+            
+        }
+        
         return new ViewModel([
 
-            'productos' => $this->table->fetchAll(),
+            'productos' => $this->table->fetchAll($buscar),
+            
         ]);
     }
 

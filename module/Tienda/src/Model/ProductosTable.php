@@ -4,7 +4,10 @@ namespace Tienda\Model;
 
 use RuntimeException;
 use Laminas\Db\TableGateway\TableGatewayInterface;
+
+use Laminas\Db\Sql\Select;
 use Tienda\Model\Productos;
+use Laminas\Db\Sql\Where;
 
 class ProductosTable
 {
@@ -15,9 +18,13 @@ class ProductosTable
         $this->tableGateway = $tableGateway;
     }
 
-    public function fetchAll()
-    {
-        return $this->tableGateway->select();
+    public function fetchAll($findByName = '')
+    {        
+        $where = new Where();
+        
+        $where->like('nombre', '%'.$findByName.'%');
+        
+        return $this->tableGateway->select($where);
     }
 
     public function getProducto($id)
