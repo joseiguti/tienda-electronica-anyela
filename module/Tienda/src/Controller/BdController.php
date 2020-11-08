@@ -20,7 +20,7 @@ class BdController extends AbstractActionController {
         
         $success = false;
         
-        $dbname = 'anyela_new_database';
+        $dbname = 'bdunad301127_1';
         
         $qstment = $this->adapter->createStatement("SHOW DATABASES LIKE '$dbname'");
         
@@ -43,6 +43,33 @@ class BdController extends AbstractActionController {
         ]);
     }
 
+    public function index2Action ()
+    {
+
+        $success = false;
+
+        $dbname = 'bdunad301127_1';
+
+        $qstment = $this->adapter->createStatement("SHOW DATABASES LIKE '$dbname'");
+
+        $res = $qstment->execute();
+
+        if (!count($res)){
+
+            $cstment = $this->adapter->createStatement('CREATE DATABASE IF NOT EXISTS '.$dbname);
+
+            $res = $cstment->execute();
+
+            $success = $res->getAffectedRows()>0?true:false;
+        }
+
+        return new ViewModel([
+
+            'form' => '',
+
+            'success' => $success
+        ]);
+    }
     
 }
 

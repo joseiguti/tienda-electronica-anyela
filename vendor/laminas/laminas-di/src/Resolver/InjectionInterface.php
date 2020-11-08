@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Di\Resolver;
 
 use Laminas\Di\Exception\LogicException;
@@ -26,6 +28,7 @@ use Psr\Container\ContainerInterface;
  * generators will use it to generate a factory.
  *
  * @internal
+ *
  * @see DependencyResolverInterface::resolveParameters() The resolver method's return type
  * @see \Laminas\Di\Injector::getInjectionValue()           The default injector implementation
  * @see TypeInjection                                    Implementation for injecting an instance of a specific type
@@ -47,9 +50,9 @@ interface InjectionInterface
      *
      * This will be used by code generators to provide AoT factories
      *
-     * @throws LogicException When the injection is not exportable
+     * @throws LogicException When the injection is not exportable.
      */
-    public function export() : string;
+    public function export(): string;
 
     /**
      * Whether this injection can be exported as code or not
@@ -61,5 +64,5 @@ interface InjectionInterface
      * When this method returns false, a call to `export()` should throw a
      * `Laminas\Di\Exception\LogicException`
      */
-    public function isExportable() : bool;
+    public function isExportable(): bool;
 }

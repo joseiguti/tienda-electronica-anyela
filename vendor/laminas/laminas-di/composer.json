@@ -26,18 +26,20 @@
         }
     },
     "require": {
-        "php": "^7.1",
-        "laminas/laminas-stdlib": "^2.7 || ^3.0",
+        "php": "^7.3 || ~8.0.0",
+        "laminas/laminas-stdlib": "^3.3",
         "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
         "psr/container": "^1.0",
         "psr/log": "^1.0"
     },
     "require-dev": {
         "container-interop/container-interop": "^1.2.0",
-        "laminas/laminas-coding-standard": "~1.0.0",
-        "laminas/laminas-servicemanager": "^3.0",
+        "laminas/laminas-coding-standard": "^2",
+        "laminas/laminas-servicemanager": "^3.4",
         "mikey179/vfsstream": "^1.6.7",
-        "phpunit/phpunit": "^7.5.18 || ^8.5"
+        "phpstan/phpstan": "^0.12",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.3"
     },
     "conflict": {
         "laminas/laminas-servicemanager-di": "*",
@@ -59,10 +61,12 @@
     "scripts": {
         "check": [
             "@cs-check",
+            "@analyse",
             "@test"
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "analyse": "phpstan analyse --no-progress -c phpstan.neon",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },

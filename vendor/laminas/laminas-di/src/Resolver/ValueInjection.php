@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Di\Resolver;
 
 use Laminas\Di\Exception\LogicException;
@@ -41,10 +43,7 @@ class ValueInjection implements InjectionInterface
         $this->value = $value;
     }
 
-    /**
-     * @param array $state
-     */
-    public static function __set_state(array $state) : self
+    public static function __set_state(array $state): self
     {
         return new self($state['value']);
     }
@@ -52,10 +51,9 @@ class ValueInjection implements InjectionInterface
     /**
      * Exports the encapsulated value to php code
      *
-     * @return string
      * @throws LogicException
      */
-    public function export() : string
+    public function export(): string
     {
         if (! $this->isExportable()) {
             throw new LogicException('Unable to export value');
@@ -70,10 +68,8 @@ class ValueInjection implements InjectionInterface
 
     /**
      * Checks wether the value can be exported for code generation or not
-     *
-     * @return bool
      */
-    public function isExportable() : bool
+    public function isExportable(): bool
     {
         return $this->isExportableRecursive($this->value);
     }
@@ -84,7 +80,7 @@ class ValueInjection implements InjectionInterface
      *
      * @param mixed $value
      */
-    private function isExportableRecursive($value) : bool
+    private function isExportableRecursive($value): bool
     {
         if (is_scalar($value) || $value === null) {
             return true;
@@ -109,6 +105,7 @@ class ValueInjection implements InjectionInterface
         return false;
     }
 
+    /** @return mixed */
     public function toValue(ContainerInterface $container)
     {
         return $this->value;
@@ -118,12 +115,15 @@ class ValueInjection implements InjectionInterface
      * Get the value to inject
      *
      * @deprecated Since 3.1.0
+     *
      * @see toValue()
+     *
+     * @return mixed
      */
     public function getValue()
     {
         trigger_error(
-            __METHOD__ . ' is deprecated, please migrate to ' . __CLASS__ . '::toValue().',
+            __METHOD__ . ' is deprecated, please migrate to ' . self::class . '::toValue().',
             E_USER_DEPRECATED
         );
 

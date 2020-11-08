@@ -6,9 +6,16 @@
  * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Di;
 
 use ArrayAccess;
+
+use function array_keys;
+use function class_exists;
+use function interface_exists;
+use function is_array;
 
 /**
  * Provides a DI configuration from an array.
@@ -75,14 +82,10 @@ use ArrayAccess;
  */
 class Config implements ConfigInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $preferences = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $types = [];
 
     /**
@@ -96,37 +99,26 @@ class Config implements ConfigInterface
      */
     public function __construct($options = [])
     {
-        if (! is_array($options) && ! ($options instanceof ArrayAccess)) {
-            throw new Exception\InvalidArgumentException(
-                'Config data must be of type array or ArrayAccess'
-            );
-        }
-
-        $this->preferences = $this->getDataFromArray($options, 'preferences')?: [];
-        $this->types = $this->getDataFromArray($options, 'types')?: [];
+        $this->ensureArrayOrArrayAccess($options);
+        $this->preferences = $this->getDataFromArray($options, 'preferences') ?: [];
+        $this->types       = $this->getDataFromArray($options, 'types') ?: [];
     }
 
     /**
-     * @param array $data
-     * @param string $key
-     * @return array|ArrayAccess|null
+     * @param array|ArrayAccess $data
      */
-    private function getDataFromArray($data, $key)
+    private function getDataFromArray($data, string $key): array
     {
-        if (! isset($data[$key])
-            || (! is_array($data[$key]) && ! ($data[$key] instanceof ArrayAccess))
-        ) {
-            return null;
-        }
-
-        return $data[$key];
+        $result = $data[$key] ?? [];
+        return is_array($result) ? $result : [];
     }
 
     /**
      * {@inheritDoc}
+     *
      * @see Laminas\Di\ConfigInterface::getClassForAlias()
      */
-    public function getClassForAlias(string $name) : ?string
+    public function getClassForAlias(string $name): ?string
     {
         if (isset($this->types[$name]['typeOf'])) {
             return $this->types[$name]['typeOf'];
@@ -141,7 +133,7 @@ class Config implements ConfigInterface
      * @param string $type The alias or class name
      * @return array The configured parameters
      */
-    public function getParameters(string $type) : array
+    public function getParameters(string $type): array
     {
         if (! isset($this->types[$type]['parameters']) || ! is_array($this->types[$type]['parameters'])) {
             return [];
@@ -152,7 +144,10 @@ class Config implements ConfigInterface
 
     /**
      * {@inheritDoc}
+     *
      * @see Laminas\Di\ConfigInterface::setParameters()
+     *
+     * @return $this
      */
     public function setParameters(string $type, array $params)
     {
@@ -160,12 +155,7 @@ class Config implements ConfigInterface
         return $this;
     }
 
-    /**
-     * @param string $type
-     * @param string $context
-     * @return string|null
-     */
-    public function getTypePreference(string $type, ?string $context = null) : ?string
+    public function getTypePreference(string $type, ?string $context = null): ?string
     {
         if ($context) {
             return $this->getTypePreferenceForClass($type, $context);
@@ -176,47 +166,45 @@ class Config implements ConfigInterface
         }
 
         $preference = $this->preferences[$type];
-        return ($preference != '') ? (string)$preference : null;
+        return $preference !== '' ? (string) $preference : null;
     }
 
     /**
      * {@inheritDoc}
+     *
      * @see Laminas\Di\ConfigInterface::getTypePreferencesForClass()
      */
-    private function getTypePreferenceForClass(string $type, ?string $context) : ?string
+    private function getTypePreferenceForClass(string $type, ?string $context): ?string
     {
         if (! isset($this->types[$context]['preferences'][$type])) {
             return null;
         }
 
         $preference = $this->types[$context]['preferences'][$type];
-        return ($preference != '') ? (string)$preference : null;
+        return $preference !== '' ? (string) $preference : null;
     }
 
     /**
      * {@inheritDoc}
+     *
      * @see ConfigInterface::isAlias()
      */
-    public function isAlias(string $name) : bool
+    public function isAlias(string $name): bool
     {
         return isset($this->types[$name]['typeOf']);
     }
 
     /**
      * {@inheritDoc}
+     *
      * @see ConfigInterface::getConfiguredTypeNames()
      */
-    public function getConfiguredTypeNames() : array
+    public function getConfiguredTypeNames(): array
     {
         return array_keys($this->types);
     }
 
-    /**
-     * @param string $type
-     * @param string $preference
-     * @param string $context
-     */
-    public function setTypePreference(string $type, string $preference, ?string $context = null) : self
+    public function setTypePreference(string $type, string $preference, ?string $context = null): self
     {
         if ($context) {
             $this->types[$context]['preferences'][$type] = $preference;
@@ -230,16 +218,25 @@ class Config implements ConfigInterface
     /**
      * @param string $name The name of the alias
      * @param string $class The class name this alias points to
-     * @throws Exception\ClassNotFoundException When `$class` does not exist
-     * @return self
+     * @throws Exception\ClassNotFoundException When `$class` does not exist.
      */
-    public function setAlias(string $name, string $class) : self
+    public function setAlias(string $name, string $class): self
     {
         if (! class_exists($class) && ! interface_exists($class)) {
-            throw new Exception\ClassNotFoundException('Could not find class "' . $class . '"');
+            throw new Exception\ClassNotFoundException($class);
         }
 
         $this->types[$name]['typeOf'] = $class;
         return $this;
+    }
+
+    /** @param array|ArrayAccess $options */
+    private function ensureArrayOrArrayAccess($options): void
+    {
+        if (! is_array($options) && ! $options instanceof ArrayAccess) {
+            throw new Exception\InvalidArgumentException(
+                'Config data must be of type array or ArrayAccess'
+            );
+        }
     }
 }

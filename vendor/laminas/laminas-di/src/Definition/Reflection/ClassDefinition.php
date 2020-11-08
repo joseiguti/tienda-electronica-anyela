@@ -6,28 +6,27 @@
  * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Di\Definition\Reflection;
 
 use Laminas\Di\Definition\ClassDefinitionInterface;
 use Laminas\Di\Definition\ParameterInterface;
 use ReflectionClass;
+use ReflectionParameter;
+
+use function uasort;
 
 class ClassDefinition implements ClassDefinitionInterface
 {
-    /**
-     * @var ReflectionClass
-     */
+    /** @var ReflectionClass */
     private $reflection;
 
-    /**
-     * @var Parameter[]
-     */
-    private $parameters = null;
+    /** @var Parameter[] */
+    private $parameters;
 
-    /**
-     * @var string[]
-     */
-    private $supertypes = null;
+    /** @var string[] */
+    private $supertypes;
 
     /**
      * @param string|ReflectionClass $class
@@ -41,23 +40,17 @@ class ClassDefinition implements ClassDefinitionInterface
         $this->reflection = $class;
     }
 
-    /**
-     * @return void
-     */
     private function reflectSupertypes()
     {
         $this->supertypes = [];
-        $class = $this->reflection;
+        $class            = $this->reflection;
 
         while ($class = $class->getParentClass()) {
             $this->supertypes[] = $class->name;
         }
     }
 
-    /**
-     * @return ReflectionClass
-     */
-    public function getReflection() : ReflectionClass
+    public function getReflection(): ReflectionClass
     {
         return $this->reflection;
     }
@@ -65,7 +58,7 @@ class ClassDefinition implements ClassDefinitionInterface
     /**
      * @return string[]
      */
-    public function getSupertypes() : array
+    public function getSupertypes(): array
     {
         if ($this->supertypes === null) {
             $this->reflectSupertypes();
@@ -77,14 +70,11 @@ class ClassDefinition implements ClassDefinitionInterface
     /**
      * @return string[]
      */
-    public function getInterfaces() : array
+    public function getInterfaces(): array
     {
         return $this->reflection->getInterfaceNames();
     }
 
-    /**
-     * @return void
-     */
     private function reflectParameters()
     {
         $this->parameters = [];
@@ -95,9 +85,9 @@ class ClassDefinition implements ClassDefinitionInterface
 
         $method = $this->reflection->getMethod('__construct');
 
-        /** @var \ReflectionParameter $parameterReflection */
+        /** @var ReflectionParameter $parameterReflection */
         foreach ($method->getParameters() as $parameterReflection) {
-            $parameter = new Parameter($parameterReflection);
+            $parameter                               = new Parameter($parameterReflection);
             $this->parameters[$parameter->getName()] = $parameter;
         }
 
@@ -109,7 +99,7 @@ class ClassDefinition implements ClassDefinitionInterface
     /**
      * @return Parameter[]
      */
-    public function getParameters() : array
+    public function getParameters(): array
     {
         if ($this->parameters === null) {
             $this->reflectParameters();

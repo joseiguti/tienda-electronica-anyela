@@ -28,7 +28,8 @@
 		"zendframework/zend-mail" : "^2.10",
 		"laminas/laminas-mime": "^2.7",
 		"laminas/laminas-mail": "^2.10",
-		"psr/container": "^1.0"
+		"psr/container": "^1.0",
+		"vladmeh/zf3-tcpdf" : "dev-master"
 	},
 	"autoload" : {
 		"psr-4" : {

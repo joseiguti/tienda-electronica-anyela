@@ -6,8 +6,12 @@
  * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Di\Exception;
 
-class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
+use UnexpectedValueException as BaseUnexpectedValueException;
+
+class UnexpectedValueException extends BaseUnexpectedValueException implements ExceptionInterface
 {
 }

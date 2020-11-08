@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Di\Container;
 
 use Laminas\Di\CodeGenerator\InjectorGenerator;
@@ -13,32 +15,39 @@ use Laminas\Di\ConfigInterface;
 use Laminas\Di\Definition\RuntimeDefinition;
 use Laminas\Di\Resolver\DependencyResolver;
 use Psr\Container\ContainerInterface;
+use Zend\Di\ConfigInterface as LegacyConfigInterace;
 
 class GeneratorFactory
 {
-    private function getConfig(ContainerInterface $container) : ConfigInterface
+    private function getConfig(ContainerInterface $container): ConfigInterface
     {
         if ($container->has(ConfigInterface::class)) {
             return $container->get(ConfigInterface::class);
         }
 
-        if ($container->has(\Zend\Di\ConfigInterface::class)) {
-            return $container->get(\Zend\Di\ConfigInterface::class);
+        if ($container->has(LegacyConfigInterace::class)) {
+            return $container->get(LegacyConfigInterace::class);
         }
 
         return (new ConfigFactory())->create($container);
     }
 
-    public function create(ContainerInterface $container) : InjectorGenerator
+    public function create(ContainerInterface $container): InjectorGenerator
     {
-        $config = $container->has('config') ? $container->get('config') : [];
         $diConfig = $this->getConfig($container);
-        $aotConfig = $config['dependencies']['auto']['aot'] ?? [];
         $resolver = new DependencyResolver(new RuntimeDefinition(), $diConfig);
-        $namespace = $aotConfig['namespace'] ?? null;
-
         $resolver->setContainer($container);
-        $generator = new InjectorGenerator($diConfig, $resolver, $namespace);
+
+        $config    = $container->has('config') ? $container->get('config') : [];
+        $aotConfig = $config['dependencies']['auto']['aot'] ?? [];
+        $namespace = $aotConfig['namespace'] ?? null;
+        $logger    = null;
+
+        if (isset($aotConfig['logger'])) {
+            $logger = $container->get($aotConfig['logger']);
+        }
+
+        $generator = new InjectorGenerator($diConfig, $resolver, $namespace, $logger);
 
         if (isset($aotConfig['directory'])) {
             $generator->setOutputDirectory($aotConfig['directory']);
@@ -47,7 +56,7 @@ class GeneratorFactory
         return $generator;
     }
 
-    public function __invoke(ContainerInterface $container) : InjectorGenerator
+    public function __invoke(ContainerInterface $container): InjectorGenerator
     {
         return $this->create($container);
     }

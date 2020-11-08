@@ -11,6 +11,7 @@ return array(
     'Webimpress\\SafeWriter\\' => array($vendorDir . '/webimpress/safe-writer/src'),
     'TrueBV\\' => array($vendorDir . '/true/punycode/src'),
     'Tienda\\' => array($baseDir . '/module/Tienda/src'),
+    'TCPDFModule\\' => array($vendorDir . '/vladmeh/zf3-tcpdf/src'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),

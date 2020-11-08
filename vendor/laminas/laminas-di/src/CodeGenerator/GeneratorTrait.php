@@ -6,32 +6,33 @@
  * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Di\CodeGenerator;
 
 use Laminas\Di\Exception\GenerateCodeException;
 use Laminas\Di\Exception\LogicException;
+
+use function is_dir;
+use function mkdir;
+use function sprintf;
 
 /**
  * Trait with generic generator utility methods
  */
 trait GeneratorTrait
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $mode = 0755;
 
-    /**
-     * @var string
-     */
-    protected $outputDirectory = null;
+    /** @var string */
+    protected $outputDirectory;
 
     /**
      * Ensure that the given directory exists
      *
      * This will check the path at $dir if it exsits and if it is a directory
      *
-     * @param string $dir
      * @throws GenerateCodeException
      */
     protected function ensureDirectory(string $dir)
@@ -67,11 +68,11 @@ trait GeneratorTrait
      *
      * The compiler will attempt to create this directory if it does not exist
      *
-     * @param string $dir The path to the output directory
-     * @param int $mode The creation mode for the directory
-     * @return self Provides a fluent interface
+     * @param string   $dir The path to the output directory
+     * @param null|int $mode The creation mode for the directory
+     * @return $this Provides a fluent interface
      */
-    public function setOutputDirectory(string $dir, ?int $mode = null) : self
+    public function setOutputDirectory(string $dir, ?int $mode = null): self
     {
         $this->outputDirectory = $dir;
 
@@ -82,7 +83,7 @@ trait GeneratorTrait
         return $this;
     }
 
-    public function getOutputDirectory() : ?string
+    public function getOutputDirectory(): ?string
     {
         return $this->outputDirectory;
     }

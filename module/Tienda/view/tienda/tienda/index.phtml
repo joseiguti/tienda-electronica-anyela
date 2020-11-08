@@ -45,4 +45,15 @@ $this->headTitle($title);
             </td>
         </tr>
     <?php endforeach; ?>
+    <tr>
+        <th></th>
+        <th></th>
+        <th> <a href="<?= $this->url('tienda', ['action' => 'generar', 'id' => $producto->id]) ?>">Generar PDF</a></th>
+        <th></th>
+        <th></th>
+    </tr>
 </table>
+
+<?php
+//$form->setAttribute('action', $this->url('application', ['action' => 'generar']));
+?>

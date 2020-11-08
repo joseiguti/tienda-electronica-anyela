@@ -1,0 +1,8 @@
+<?php
+
+$title = 'Database';
+$this->headTitle($title);
+?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+
+<?= ($success)?'Se creo la tabla de datos':'La base de datos no se pudo crear' ?>

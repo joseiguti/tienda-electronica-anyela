@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Di;
 
 /**
@@ -30,7 +32,7 @@ class Module
     /**
      * Returns the configuration for laminas-mvc
      */
-    public function getConfig() : array
+    public function getConfig(): array
     {
         $provider = new ConfigProvider();
         return [

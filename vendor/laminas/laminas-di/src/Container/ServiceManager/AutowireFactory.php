@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Di\Container\ServiceManager;
 
 use Interop\Container\ContainerInterface;
@@ -19,18 +21,19 @@ use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
  */
 class AutowireFactory implements AbstractFactoryInterface
 {
-    /**
-     * @var GenericAutowireFactory
-     */
+    /** @var GenericAutowireFactory */
     private $factory;
 
-    public function __construct(GenericAutowireFactory $factory = null)
+    public function __construct(?GenericAutowireFactory $factory = null)
     {
         $this->factory = $factory ? : new GenericAutowireFactory();
     }
 
     /**
      * Check creatability of the requested name
+     *
+     * @param string $requestedName
+     * @return bool
      */
     public function canCreate(ContainerInterface $container, $requestedName)
     {
@@ -39,8 +42,11 @@ class AutowireFactory implements AbstractFactoryInterface
 
     /**
      * Make invokable and implement the laminas-service factory pattern
+     *
+     * @param string $requestedName
+     * @return bool
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         return $this->factory->create($container, (string) $requestedName, $options);
     }

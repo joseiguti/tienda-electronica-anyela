@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Di\CodeGenerator;
 
 use Laminas\Di\Exception\GenerateCodeException;
@@ -14,8 +16,11 @@ use Throwable;
 
 use function array_keys;
 use function array_map;
+use function assert;
 use function file_get_contents;
 use function implode;
+use function is_string;
+use function sprintf;
 use function str_repeat;
 use function strtr;
 use function var_export;
@@ -25,11 +30,9 @@ class AutoloadGenerator
     use GeneratorTrait;
 
     private const CLASS_TEMPLATE = __DIR__ . '/../../templates/autoloader-class.template';
-    private const FILE_TEMPLATE = __DIR__ . '/../../templates/autoloader-file.template';
+    private const FILE_TEMPLATE  = __DIR__ . '/../../templates/autoloader-file.template';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $namespace;
 
     public function __construct(string $namespace)
@@ -37,7 +40,7 @@ class AutoloadGenerator
         $this->namespace = $namespace;
     }
 
-    private function writeFile(string $filename, string $code) : void
+    private function writeFile(string $filename, string $code): void
     {
         try {
             $file = new SplFileObject($filename, 'w');
@@ -47,18 +50,22 @@ class AutoloadGenerator
         }
     }
 
-    private function buildFromTemplate(string $templateFile, string $outputFile, array $replacements) : void
+    private function buildFromTemplate(string $templateFile, string $outputFile, array $replacements): void
     {
+        $template = file_get_contents($templateFile);
+
+        assert(is_string($template));
+
         $this->writeFile(
             sprintf('%s/%s', $this->outputDirectory, $outputFile),
             strtr(
-                file_get_contents($templateFile),
+                $template,
                 $replacements
             )
         );
     }
 
-    private function generateClassmapCode(array &$classmap) : string
+    private function generateClassmapCode(array &$classmap): string
     {
         $lines = array_map(
             function (string $class, string $file): string {
@@ -76,15 +83,15 @@ class AutoloadGenerator
         return implode($indentation, $lines);
     }
 
-    private function generateAutoloaderClass(array &$classmap) : void
+    private function generateAutoloaderClass(array &$classmap): void
     {
         $this->buildFromTemplate(self::CLASS_TEMPLATE, 'Autoloader.php', [
             '%namespace%' => $this->namespace ? sprintf("namespace %s;\n", $this->namespace) : '',
-            '%classmap%' => $this->generateClassmapCode($classmap),
+            '%classmap%'  => $this->generateClassmapCode($classmap),
         ]);
     }
 
-    private function generateAutoloadFile() : void
+    private function generateAutoloadFile(): void
     {
         $this->buildFromTemplate(self::FILE_TEMPLATE, 'autoload.php', [
             '%namespace%' => $this->namespace ? sprintf("namespace %s;\n", $this->namespace) : '',
@@ -94,7 +101,7 @@ class AutoloadGenerator
     /**
      * @param string[] $classmap
      */
-    public function generate(array &$classmap) : void
+    public function generate(array &$classmap): void
     {
         $this->ensureOutputDirectory();
         $this->generateAutoloaderClass($classmap);

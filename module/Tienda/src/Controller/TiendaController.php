@@ -13,6 +13,9 @@ class TiendaController extends AbstractActionController {
 
     // Add this property:
     private $table;
+  //  protected $tcpdf;
+    private $tcpdf;
+    private $renderer;
 
     public function __construct(ProductosTable $table)
     {
@@ -56,6 +59,8 @@ class TiendaController extends AbstractActionController {
             
         ]);
     }
+
+
 
 
     public function recordAction ()
@@ -152,6 +157,67 @@ class TiendaController extends AbstractActionController {
 
             'productos' => $this->table->fetchAll(),
         ]);
+    }
+
+  /*  public function calculadoraAction(){
+
+        $form = new MainForm();
+
+        $form->get('submit')->setValue("Generar");
+
+        return [
+            'form' => $form
+        ];
+    }*/
+
+    public function generarAction(){
+
+        $postData = $this->getRequest()->getPost();
+
+        $calculadora = new Calculadora($postData);
+
+        $pdf = $this->tcpdf;
+
+        $view = new ViewModel();
+
+        $renderer = $this->renderer;
+
+        $view->setTemplate('layout/pdf.phtml');
+
+        $view->setVariable('nombre_completo', $_POST['nombres']);
+
+        $view->setVariable('identificacion', $_POST['precio']);
+
+        $view->setVariable('valor_solicitado', $_POST['cantidad']);
+
+        $view->setVariable('plazo', $_POST['marca']);
+
+
+        $html = $renderer->render($view);
+
+        $viewTable = new ViewModel();
+
+        $viewTable->setTemplate('layout/table_pdf.phtml');
+
+        if ($_POST['periodo_gracia'] == 0)
+
+            $viewTable->setVariable('tableTittle', 'Cuadro de amortización cuota fija');
+
+        else
+
+            $viewTable->setVariable('tableTittle', 'Cuadro de amortización cuota fija con periodo de gracia');
+
+        $viewTable->setVariable('tableContent', $calculadora->getTableAmortizacionCuotaFija());
+
+        $htmlTable = $renderer->render($viewTable);
+
+        $pdf->SetFont('arialnarrow', '', 12, '', false);
+
+        $pdf->AddPage('LANDSCAPE');
+
+        $pdf->writeHTML(($html.$htmlTable), true, false, true, false, '');
+
+        $pdf->Output(dirname(__FILE__) .'../../../../../data/pdf/reportes_productos_'.$_POST['identificacion'].'.pdf',"FD");
     }
     
 }

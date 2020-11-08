@@ -2,6 +2,52 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.2.0 - 2020-10-21
+
+### Added
+
+- [zendframework/zend-di#51](https://github.com/zendframework/zend-di/pull/51) adds `Laminas\Di\GeneratedInjectorDelegator` to decorate the
+  default injector with an AoT generated one.
+- [#11](https://github.com/laminas/laminas-di/pull/11) adds a config option to configure a logger for the AoT generator.
+
+### Removed
+
+- [zendframework/zend-di#48](https://github.com/zendframework/zend-di/pull/48) removes support for laminas-stdlib v2 releases.
+
+
+-----
+
+### Release Notes for [3.2.0](https://github.com/laminas/laminas-di/milestone/1)
+
+
+
+### 3.2.0
+
+- Total issues resolved: **1**
+- Total pull requests resolved: **6**
+- Total contributors: **5**
+
+#### Documentation
+
+ - [19: Add support for multiple releases in documentation](https://github.com/laminas/laminas-di/pull/19) thanks to @tux-rampage and @froschdesign
+
+#### Enhancement,hacktoberfest-accepted
+
+ - [16: Migrate to laminas/laminas-coding-standard v2](https://github.com/laminas/laminas-di/pull/16) thanks to @gennadigennadigennadi
+ - [15: Bump supported php versions](https://github.com/laminas/laminas-di/pull/15) thanks to @gennadigennadigennadi
+
+#### Review Needed
+
+ - [14: Merge release 3.1.3 into 3.2.x](https://github.com/laminas/laminas-di/pull/14) thanks to @github-actions[bot]
+
+#### Bug
+
+ - [12: Fix handling of aot namespace config](https://github.com/laminas/laminas-di/pull/12) thanks to @tux-rampage
+
+#### Enhancement
+
+ - [11: Custom logger](https://github.com/laminas/laminas-di/pull/11) thanks to @waahhhh
+
 ## 3.1.3 - 2020-09-16
 
 

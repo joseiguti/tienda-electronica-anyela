@@ -6,9 +6,13 @@
  * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Di;
 
 use Psr\Container\ContainerInterface;
+
+use function get_class;
 
 /**
  * Default IoC container implementation.
@@ -31,17 +35,14 @@ class DefaultContainer implements ContainerInterface
      */
     protected $services = [];
 
-    /**
-     * @param InjectorInterface $di
-     */
     public function __construct(InjectorInterface $injector)
     {
         $this->injector = $injector;
 
-        $this->services[InjectorInterface::class] = $injector;
+        $this->services[InjectorInterface::class]  = $injector;
         $this->services[ContainerInterface::class] = $this;
-        $this->services[get_class($injector)] = $injector;
-        $this->services[get_class($this)] = $this;
+        $this->services[get_class($injector)]      = $injector;
+        $this->services[static::class]             = $this;
     }
 
     /**
@@ -49,9 +50,8 @@ class DefaultContainer implements ContainerInterface
      *
      * @param string $name The name of the service retrievable by get()
      * @param object $service The service instance
-     * @return self
      */
-    public function setInstance(string $name, $service) : self
+    public function setInstance(string $name, $service): self
     {
         $this->services[$name] = $service;
         return $this;
@@ -61,6 +61,7 @@ class DefaultContainer implements ContainerInterface
      * Check if a service is available
      *
      * @see ContainerInterface::has()
+     *
      * @param string $name
      * @return mixed
      */
@@ -83,6 +84,7 @@ class DefaultContainer implements ContainerInterface
      * the dependency injector and then it is stored for further use.
      *
      * @see ContainerInterface::get()
+     *
      * @param string $name
      * @return mixed
      */

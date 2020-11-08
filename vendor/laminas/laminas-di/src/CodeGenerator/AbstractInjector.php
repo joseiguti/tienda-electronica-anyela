@@ -6,40 +6,37 @@
  * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Di\CodeGenerator;
 
 use Laminas\Di\DefaultContainer;
 use Laminas\Di\InjectorInterface;
 use Psr\Container\ContainerInterface;
 
-use function is_string;
-
 /**
  * Abstract class for code generated dependency injectors
  */
 abstract class AbstractInjector implements InjectorInterface
 {
-    /**
-     * @var string|FactoryInterface[]
-     */
+    /** @var string[]|FactoryInterface[] */
     protected $factories = [];
 
-    /**
-     * @var ContainerInterface
-     */
+    /** @var FactoryInterface[] */
+    private $factoryInstances = [];
+
+    /** @var ContainerInterface */
     private $container;
 
-    /**
-     * @var InjectorInterface
-     */
+    /** @var InjectorInterface */
     private $injector;
 
     /**
      * {@inheritDoc}
      */
-    public function __construct(InjectorInterface $injector, ContainerInterface $container = null)
+    public function __construct(InjectorInterface $injector, ?ContainerInterface $container = null)
     {
-        $this->injector = $injector;
+        $this->injector  = $injector;
         $this->container = $container ?: new DefaultContainer($this);
 
         $this->loadFactoryList();
@@ -48,23 +45,33 @@ abstract class AbstractInjector implements InjectorInterface
     /**
      * Init factory list
      */
-    abstract protected function loadFactoryList() : void;
+    abstract protected function loadFactoryList(): void;
 
-    private function getFactory($type) : FactoryInterface
+    private function setFactory(string $type, FactoryInterface $factory): void
     {
-        if (is_string($this->factories[$type])) {
-            $factory = $this->factories[$type];
-            $this->factories[$type] = new $factory();
+        $this->factoryInstances[$type] = $factory;
+    }
+    
+    private function getFactory(string $type): FactoryInterface
+    {
+        if (isset($this->factoryInstances[$type])) {
+            return $this->factoryInstances[$type];
         }
 
-        return $this->factories[$type];
+        $factoryClass = $this->factories[$type];
+        $factory      = $factoryClass instanceof FactoryInterface ? $factoryClass : new $factoryClass();
+
+        $this->setFactory($type, $factory);
+
+        return $factory;
     }
 
-    public function canCreate(string $name) : bool
+    public function canCreate(string $name): bool
     {
-        return (isset($this->factories[$name]) || $this->injector->canCreate($name));
+        return isset($this->factories[$name]) || $this->injector->canCreate($name);
     }
 
+    /** @return mixed */
     public function create(string $name, array $options = [])
     {
         if (isset($this->factories[$name])) {

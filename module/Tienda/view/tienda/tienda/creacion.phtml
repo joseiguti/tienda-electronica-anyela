@@ -7,9 +7,14 @@ $element->setValue('foo');
 
 <table>
   <tr>
-      <td> <a href="<?= $this->url('tienda', ['action' => 'crear', 'id' => $producto->id]) ?>">Crear Base de Datos</a>  </td>
+      <td> <a class="nav-link" href="<?= $this->url('bd', ['action' => 'index']) ?>">Crear Base de Datos<span class="sr-only"></span></a>
+      </td>
     </tr>
     <tr>
-        <td> Crear tabla</td>
+        <td> <a class="nav-link" href="<?= $this->url('bd', ['action' => 'index2']) ?>">Crear tabla<span class="sr-only"></span></a></td>
+    </tr>
+
+    <tr>
+        <td> <a class="nav-link" href="<?= $this->url('bd', ['action' => 'index2']) ?>">Crear backup <span class="sr-only"></span></a></td>
     </tr>
 </table>
