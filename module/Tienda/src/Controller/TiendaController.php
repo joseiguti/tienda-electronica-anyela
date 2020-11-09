@@ -13,13 +13,24 @@ class TiendaController extends AbstractActionController {
 
     // Add this property:
     private $table;
-  //  protected $tcpdf;
-    private $tcpdf;
-    private $renderer;
+    
+    /**
+     * @var \TCPDF
+     */
+    protected $tcpdf;
+    
+    /**
+     * @var RendererInterface
+     */
+    protected $renderer;
 
-    public function __construct(ProductosTable $table)
+    public function __construct(ProductosTable $table, $tspdf, $renderer)
     {
         $this->table = $table;
+        
+        $this->tcpdf = $tspdf;
+        
+        $this->renderer = $renderer;
     }
 
     public function saludarAction (){
@@ -28,7 +39,9 @@ class TiendaController extends AbstractActionController {
 
         return new ViewModel(['nombre' => $producto->nombre]);
     }
+    
     public function calcularAction (){
+        
         return new ViewModel([
 
             'productos' => $this->table->fetchAll(),
@@ -36,6 +49,7 @@ class TiendaController extends AbstractActionController {
     }
 
     public function creacionAction (){
+        
         return new ViewModel([
 
             'productos' => $this->table->fetchAll(),
@@ -61,6 +75,27 @@ class TiendaController extends AbstractActionController {
     }
 
 
+    public function pdfAction ()
+    {
+        
+        $pdf = $this->tcpdf;
+        
+        $view = new ViewModel();
+        
+        $renderer = $this->renderer;
+        
+        $view->setTemplate('layout/pdf.phtml');
+        
+        $view->setVariable('productos', $this->table->fetchAll());
+        
+        $html = $renderer->render($view);
+        
+        $pdf->AddPage('LANDSCAPE');
+        
+        $pdf->writeHTML(($html), true, false, true, false, '');
+        
+        $pdf->Output(dirname(__FILE__) .'../../../../../data/registros.pdf',"FD");
+    }
 
 
     public function recordAction ()

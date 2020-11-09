@@ -44,16 +44,9 @@ $this->headTitle($title);
                 <a href="<?= $this->url('tienda', ['action' => 'delete', 'id' => $producto->id]) ?>" onclick="return confirm('Confirma eliminar?')">Borrar</a>
             </td>
         </tr>
-    <?php endforeach; ?>
-    <tr>
-        <th></th>
-        <th></th>
-        <th> <a href="<?= $this->url('tienda', ['action' => 'generar', 'id' => $producto->id]) ?>">Generar PDF</a></th>
-        <th></th>
-        <th></th>
-    </tr>
+    <?php endforeach; ?>    
 </table>
-
+<a href="<?= $this->url('tienda', ['action' => 'pdf']) ?>" class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Generar PDF</a>
 <?php
 //$form->setAttribute('action', $this->url('application', ['action' => 'generar']));
 ?>

@@ -7,6 +7,7 @@ use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 use Laminas\Db\Adapter\Adapter;
+use Laminas\View\Renderer\RendererInterface;
 
 
 class Module implements ConfigProviderInterface
@@ -23,7 +24,9 @@ class Module implements ConfigProviderInterface
             'factories' => [
                 Controller\TiendaController::class => function($container) {
                     return new Controller\TiendaController(
-                        $container->get(Model\ProductosTable::class)
+                        $container->get(Model\ProductosTable::class),
+                        $container->get(\TCPDF::class),
+                        $container->get(RendererInterface::class)
                     );
                 },
                 Controller\BdController::class => function($container) {

@@ -1,19 +1,29 @@
 <table>
+    <tr>
+        <td><img src="/img/logo.jpg"></td>
+    </tr>       
+</table>
+<br>
+<table style="border-style: solid;">
     <thead>
     <tr>
-        <td colspan="3"><b>Datos del Almacen</b></td>
+        <td colspan="7"><b><?= $this->tableTittle ?></b></td>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td colspan="3">A continuacion se relacionan los datos actuales del almacen</td>
+        <td style="background-color: #e5dada;">Nombre</td>
+        <td style="background-color: #e5dada;">Precio</td>
+        <td style="background-color: #e5dada;">Cantidad</td>
+        <td style="background-color: #e5dada;">Marca</td>
     </tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td colspan="2"></td>
-    </tr>
-    <tr>
-        <td rowspan="10"><img src="/img/logo.jpg"></td>
-    </tr>
-       </tbody>
+    <?php foreach ($productos as $producto) : ?>
+        <tr>
+            <td><?= $this->escapeHtml($producto->nombre) ?></td>
+            <td><?= $this->escapeHtml($producto->precio) ?></td>
+            <td><?= $this->escapeHtml($producto->cantidad) ?></td>
+            <td><?= $this->escapeHtml($producto->marca) ?></td>            
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
 </table>
